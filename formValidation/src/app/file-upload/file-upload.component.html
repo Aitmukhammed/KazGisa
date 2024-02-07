@@ -1,0 +1,12 @@
+<!-- file-upload.component.html -->
+<form>
+  <label for="fileInput" class="custom-file-input" [class.disabled]="!isFileValid()">
+    Выберите файл PDF
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".pdf" required />
+  </label>
+  <div class="file-name" *ngIf="dataService.selectedFile">{{ dataService.selectedFile.name }}</div>
+  <div class="buttons-container">
+    <button routerLink="/">Назад</button>
+    <button type="submit" [disabled]="!isFileValid()" routerLink="/mail">Далее</button>
+  </div>
+</form>

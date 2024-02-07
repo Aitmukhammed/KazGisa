@@ -1,0 +1,69 @@
+<div>
+  <div class="radio_btn_container">
+    <label>
+      <input type="radio" name="userType" value="individual" [checked]="individual" (change)="onRadioChange('individual')">
+      Физическое лицо
+    </label>
+    <label>
+      <input type="radio" name="userType" value="legalEntity" [checked]="legalEntity" (change)="onRadioChange('legalEntity')">
+      Юридическое лицо
+    </label>
+  </div>
+
+  <div>
+    <div class="individual_container" *ngIf="individual == true">
+      <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+        <label>
+          Фамилия:
+          <input type="text" name="lastName" [(ngModel)]="lastName" required maxlength="255">
+        </label>
+
+        <label>
+          Имя:
+          <input type="text" name="firstName" [(ngModel)]="firstName" required maxlength="255">
+        </label>
+
+        <label>
+          Отчество:
+          <input type="text" name="middleName" [(ngModel)]="middleName" maxlength="255">
+        </label>
+
+        <label>
+          Дата рождения:
+          <input type="date" name="birthDate" [(ngModel)]="birthDate" required>
+        </label>
+
+        <label>
+          ИИН:
+          <input type="text" name="iin" [(ngModel)] = "iin" appIinDirective required>
+        </label>
+
+        <!-- <button type="submit" [disabled]="!myForm.valid" [ngStyle]="{'background-color': !myForm.valid ? '#7eb981' : ''}"> -->
+        <button type="submit"> Далее </button>
+
+      </form>
+    </div>
+
+    <div class="legalEntityContainer" *ngIf="legalEntity == true">
+      <form (ngSubmit)="onSubmit()">
+        <label>
+          Наименование организации
+          <input type="text" name="lastName" [(ngModel)] = "organizationName" required maxlength="255">
+        </label>
+
+        <label>
+          Форма организации:
+          <select [(ngModel)]="organizationType" name="organizationType" [(ngModel)] = "organizationType">
+            <option *ngFor="let type of organizationTypes" [value]="type">{{ type }}</option>
+          </select>
+        </label>
+
+        <label>
+          БИН
+          <input type="text" name="middleName" [(ngModel)] = "bin" appIinDirective>
+        </label>
+        <button type="submit">Далее</button>
+      </form>
+    </div>
+  </div>
+</div>

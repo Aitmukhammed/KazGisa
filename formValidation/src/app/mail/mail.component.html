@@ -1,0 +1,13 @@
+<div class="container">
+  <input type="email" required [(ngModel)]="user.email" appInvalidEmail="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #name="ngModel" maxlength="255">
+
+  <div *ngIf="name.invalid && (name.dirty || name.touched)">
+    <div *ngIf="name.errors?.['required']">Email is required.</div>
+    <div *ngIf="name.errors?.['invalidEmail']">Invalid email format.</div>
+  </div>
+  <div class="buttons-container">
+    <button routerLink="/upload">Назад</button>
+    <button (click)="validateAndShowModal()">Отправить</button>
+  </div>
+</div>
+
